@@ -1,6 +1,6 @@
 import usuarios from "../models/Usuario.js";
 
-class LivroController {
+class UsuarioController {
     static listarUsuarios = async(req, res) => {
         usuarios.find().exec().then((user) => {
             res.status(200).send(user);
@@ -66,4 +66,4 @@ class LivroController {
     }
 }
 
-export default LivroController
+export default UsuarioController;
