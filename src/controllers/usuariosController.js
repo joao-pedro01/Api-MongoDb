@@ -12,11 +12,12 @@ class UsuarioController {
 
     static listarLivroPorId = (req, res) => {
         const id = req.params.id;
-
+        
         livros.findById(id)
         .populate('autor', 'nome')
         .exec((err, livros) => {
         if(err) {
+            console.log()
             res.status(400).send({message: `${err.message} - Id do livro não localizado.`})
         } else {
             res.status(200).send(livros);
@@ -26,6 +27,7 @@ class UsuarioController {
 
     static cadastrarLivro = (req, res) => {
         let usuario = new usuarios(req.body);
+        console.log("entrou");
 
         usuario.save().then(()  => {
             res.status(201).send(usuario.toJSON());
@@ -47,7 +49,7 @@ class UsuarioController {
 
     static excluirUsuario = (req, res) => {
         const id = req.params.id;
-        
+        console.log(id)
         usuarios.findByIdAndDelete(id).then(() => {
             res.status(200).send({message: 'Livro removido com sucesso'})
         }).catch((err) => {
