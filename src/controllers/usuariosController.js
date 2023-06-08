@@ -10,25 +10,25 @@ class UsuarioController {
         });
     }
 
-    static listarLivroPorId = (req, res) => {
+    static listarUsuarioPorId = (req, res) => {
         const id = req.params.id;
         
-        livros.findById(id)
-        .populate('autor', 'nome')
-        .exec((err, livros) => {
+        usuarios.findById(id)
+        .populate('nome', 'email')
+        .exec((err, Usuario) => {
         if(err) {
             console.log()
             res.status(400).send({message: `${err.message} - Id do livro não localizado.`})
         } else {
-            res.status(200).send(livros);
+            res.status(200).send(Usuario);
         }
         })
     }
 
-    static cadastrarLivro = (req, res) => {
+    static cadastrarUsuario = (req, res) => {
         let usuario = new usuarios(req.body);
-        console.log("entrou");
-
+        console.log(usuario)
+        
         usuario.save().then(()  => {
             res.status(201).send(usuario.toJSON());
         }).catch((err) => {
@@ -39,9 +39,9 @@ class UsuarioController {
 
     static atualizarUsuario = (req, res) => {
         const id = req.params.id;
-
+        console.log(req.body)
         usuarios.findByIdAndUpdate(id, {$set: req.body}).then((usuario) => {
-            res.status(200).send({message: 'Livro atualizado com sucesso'})
+            res.status(200).send({message: 'Usuário atualizado com sucesso'})
         }).catch((err) => {
             res.status(500).send({message: err.message})
         })
@@ -51,16 +51,17 @@ class UsuarioController {
         const id = req.params.id;
         console.log(id)
         usuarios.findByIdAndDelete(id).then(() => {
-            res.status(200).send({message: 'Livro removido com sucesso'})
+            res.status(200).send({message: 'Usuário removido com sucesso'})
         }).catch((err) => {
             res.status(500).send({message: err.message})
         });
     }
 
-    static listarLivroPorNome = (req, res) => {
-        const nome = req.query.nome
+    static listarUsarioPorCadastro = (req, res) => {
+        let usuario = req.body;
+        console.log(usuario)
 
-        usuarios.find({'nome': nome}, {}).then((usuarios) => {
+        usuarios.find(usuario, {}).then((usuarios) => {
             res.status(200).send(usuarios);
         }).catch((err) => {
             res.status(500).send({message: err.message})

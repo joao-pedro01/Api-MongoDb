@@ -6,7 +6,7 @@ const localizacaoSchema = new mongoose.Schema(
     usuario: {type: mongoose.Schema.Types.ObjectId, ref: 'usuarios', required: true},
     latitude: {type: Number, required: true},
     longitude: {type: Number, required: true},
-    cep: {type: String, required: true}
+    cep: {type: String}
   }
 );
 

@@ -13,6 +13,8 @@ class LocalizacaoController {
     static cadastrarLocalizacao = async(req, res) => {
         let localizacao = new localizacoes(req.body);
 
+        console.log(localizacao)
+
         localizacao.save().then(()  => {
             res.status(201).send(localizacao.toJSON());
         }).catch((err) => {

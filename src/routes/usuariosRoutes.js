@@ -5,9 +5,9 @@ const router = express.Router();
 
 router
     .get("/usuarios", UsuarioController.listarUsuarios)
-    .get("/usuarios/busca", UsuarioController.listarLivroPorNome)
-//   .get("/livros/:id", UsuarioController.listarLivroPorId)
-    .post("/usuarios", UsuarioController.cadastrarLivro)
+    .post("/usuarios/busca", UsuarioController.listarUsarioPorCadastro)
+    .get("/usuarios/:id", UsuarioController.listarUsuarioPorId)
+    .post("/usuarios", UsuarioController.cadastrarUsuario)
     .put("/usuarios/:id", UsuarioController.atualizarUsuario)
     .delete("/usuarios/:id", UsuarioController.excluirUsuario)
 
